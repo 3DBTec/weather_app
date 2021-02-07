@@ -1,0 +1,46 @@
+{#{% extends 'base.html' %}#}
+
+{% block content %}
+
+    {% load static %}
+
+{#    {% load crispy_forms_tags %}#}
+
+    {% if results %}
+
+    <h1 class="mt-4">Query Weather API for Today: {{ city_name }} </h1>
+
+             {% if period == 'today' %}
+                <p>Weather<b>   &nbsp;{{ results.weather }} </b> </p>
+                <p>Temp: <b>    &nbsp;&nbsp;&nbsp;&nbsp; {{ results.temp }}</b> </p>
+                <p>Min: <b>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ results.min }}</b></p>
+                <p>Max: <b>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ results.max }}</b></p>
+                <p>Pressure:<b> {{ results.pressure }}</b> </p>
+                <p>Humidity<b>  {{ results.humidity }} </b> </p>
+                <br>
+
+             {% elif period == '1_hour' %}
+
+                 <table class="table table-striped sortable w-75">
+                     <thead class='results-heading'>
+                         <tr class="table-secondary">
+                            <th>Min</th>
+                            <th>Max</th>
+                            <th>Average</th>
+                            <th>Median</th>
+                            <th>Humidity</th>
+                         </tr>
+                     </thead>
+                     <tr>
+                         <td>{{ results.min }}</td>
+                         <td>{{ results.max }}</td>
+                         <td>{{ results.average }}</td>
+                         <td>{{ results.median }}</td>
+                         <td>{{ results.humidity }}</td>
+                     </tr>
+                 </table>
+             {% endif %}
+
+    {% endif %}
+
+{% endblock %}
