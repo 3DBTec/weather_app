@@ -61,7 +61,7 @@ class WeatherResultForm(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset(
-                'SEARCH DETAILS',
+                'RESULT DETAILS',
             ),
             Row(
                 Column('weather',   css_class='form-group col-6 mb-0 med-label'),

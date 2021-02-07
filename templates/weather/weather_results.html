@@ -10,14 +10,7 @@
         {% if time_period == 'today' %}
             <h1 class="mt-4">Weather for Today: {{ city_name }} </h1>
 
-{#            <p>Weather<b>   &nbsp;{{ results.weather }} </b> </p>#}
-{#            <p>Temp: <b>    &nbsp;&nbsp;&nbsp;&nbsp; {{ results.temp }}</b> </p>#}
-{#            <p>Min: <b>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ results.min }}</b></p>#}
-{#            <p>Max: <b>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ results.max }}</b></p>#}
-{#            <p>Pressure:<b> {{ results.pressure }}</b> </p>#}
-{#            <p>Humidity<b>  {{ results.humidity }} </b> </p>#}
-{#            <br>#}
-             <form action="" method="get">
+             <form>
                     <fieldset>
                         {% crispy form %}
                     </fieldset>
