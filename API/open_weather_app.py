@@ -12,6 +12,10 @@ def get_current_weather_by_city_name(city_name):
     results = {}
 
     print(request)
+
+    if request["cod"] == "400":
+        return results
+
     if request["cod"] != "404":
 
         results['weather']  = request['weather'][0]['main']

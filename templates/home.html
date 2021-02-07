@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% load crispy_forms_tags %}
+
+    <h3>Welcome </h3>
+
+    <p><a href="{% url 'api-root' %}">       Go to the City Restfull API Handler</a></p>
+
+    <p><a href="{% url 'weather_search' %}"> Go to the Weather Search  API Handler</a></p>
+
+{% endblock %}

@@ -48,24 +48,32 @@ class WeatherSearchView(View):
 
             form = WeatherSelectForm(request.GET or None)
 
-            # city        = form.data['city']
-            city_name   = form.data['city_name']
-            time_period = form.data['time_period']
-            period      = form.data['period']
+            city_choice     = form.data['city_choice']
+            city_text       = form.data['city_text']
+            city_use_text   = form.data['city_use_text']
+            time_period     = form.data['time_period']
+            period          = form.data['period']
 
             graphs = {}
+
+            if city_use_text:
+                city_name = city_text
+            else:
+                city_name = city_choice
 
             if time_period == 'today':
                 results     = open_weather_app.get_current_weather_by_city_name(city_name)
 
-                initial = {'weather':   results['weather'],
-                           'temp':      results['temp'],
-                           'min':       results['min'],
-                           'max':       results['max'],
-                           'pressure':  results['pressure'],
-                           'humidity':  results['humidity'],
-                           }
-                form = WeatherResultForm(initial=initial)
+                if results:
+
+                    initial = {'weather':   results['weather'],
+                               'temp':      results['temp'],
+                               'min':       results['min'],
+                               'max':       results['max'],
+                               'pressure':  results['pressure'],
+                               'humidity':  results['humidity'],
+                               }
+                    form = WeatherResultForm(initial=initial)
 
             elif time_period == 'period':
                 results, graphs    = open_weather_app.get_period_weather_by_city_name(city_name, period)

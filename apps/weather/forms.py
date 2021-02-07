@@ -6,19 +6,18 @@ from apps.city.models                               import City
 
 TIME_PERIOD = (
     ('', 'Choose...'),
-    ('today',   'Today'),
+    ('today',   'Today Only'),
     ('period',  'Number Days')
 )
 
 
 class WeatherSelectForm(forms.Form):
-    # city            = forms.ModelChoiceField(label='City', queryset=City.objects.all(), to_field_name="city_name", blank=True,
-    #                                          widget=forms.Select(attrs={'autofocus': True, 'cols': '10'})
-    #                                     )    # city            = forms.ModelChoiceField(label='City', queryset=City.objects.all(), to_field_name="city_name", blank=True,
-    #                                          widget=forms.Select(attrs={'autofocus': True, 'cols': '10'})
-    #                                     )
+    city_choice       = forms.ModelChoiceField(label='City Choice', queryset=City.objects.all(), to_field_name="city_name", blank=True,
+                                               widget=forms.Select(attrs={'autofocus': True, 'cols': '10'}))
 
-    city_name       = forms.CharField(label='City Name', max_length=200)
+    city_text       = forms.CharField(label='City Text', max_length=200, required=False)
+
+    city_use_text   = forms.BooleanField(label='Use City Text', required=False)
 
     time_period     = forms.ChoiceField(choices=TIME_PERIOD)
 
@@ -32,9 +31,20 @@ class WeatherSelectForm(forms.Form):
                 'SEARCH DETAILS',
             ),
             Row(
-                Column('city_name',     css_class='form-group col-6 mb-0 med-label'),
-                Column('time_period',   css_class='form-group col-3 mb-0 med-label'),
-                Column('period',        css_class='form-group col-3 mb-0 med-label'),
+                Column('city_choice', css_class='form-group col-3 mb-0 med-label'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('city_text', css_class='form-group col-3 mb-0 med-label'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('city_use_text', css_class='form-group col-3 mb-0 med-label'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('time_period',   css_class='form-group col-2 mb-0 med-label'),
+                Column('period',        css_class='form-group col-2 mb-0 med-label'),
                 css_class='form-row'
             ),
             Submit('submit', 'Search',      css_class='btn-blue ripple mr-0 mb-3 float-right'),
@@ -42,11 +52,6 @@ class WeatherSelectForm(forms.Form):
 
 
 class WeatherResultForm(forms.Form):
-    # city            = forms.ModelChoiceField(label='City', queryset=City.objects.all(), to_field_name="city_name", blank=True,
-    #                                          widget=forms.Select(attrs={'autofocus': True, 'cols': '10'})
-    #                                     )    # city            = forms.ModelChoiceField(label='City', queryset=City.objects.all(), to_field_name="city_name", blank=True,
-    #                                          widget=forms.Select(attrs={'autofocus': True, 'cols': '10'})
-    #                                     )
 
     weather         = forms.CharField(label='Weather',  max_length=200)
     temp            = forms.CharField(label='Average',  max_length=200)

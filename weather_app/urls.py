@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib                     import admin
 from django.urls                        import path, include
 from django.conf                        import settings
+from django.views.generic.base          import TemplateView
 
 from django.contrib.staticfiles.urls    import staticfiles_urlpatterns
 
@@ -36,11 +37,11 @@ router.register(r'countrys',    CountryViewSet)
 router.register(r'citys',       CityViewSet)
 
 urlpatterns = [
-    path('',                WeatherSearchView.as_view(),    name='weather_search'),
-    path('rest_api/',       include(router.urls)),
-    path('api-auth/',       include('rest_framework.urls')),
-    # path('api-auth/',       include('rest_framework.urls', namespace='rest_framework')),
-    path('admin/',          admin.site.urls),
+    path('',            TemplateView.as_view(template_name='home.html'), name='home'),
+    path('search',      WeatherSearchView.as_view(),                     name='weather_search'),
+    path('rest_api/',   include(router.urls),                            name='rest_api'),
+    path('api-auth/',   include('rest_framework.urls')),
+    path('admin/',      admin.site.urls,                                 name='admin'),
 ]
 
 if settings.DEBUG:
