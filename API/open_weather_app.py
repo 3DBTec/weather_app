@@ -6,7 +6,7 @@ def get_current_weather_by_city_name(city_name):
 
     api_key = "f7c6ca0448a4bb6b626a01a57e60274e"
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
-    complete_url = base_url + "appid=" + api_key + "&q=" + city_name + "&units=" + 'metric'
+    complete_url = f"{base_url}appid={api_key}&q={city_name}&units=metric"
 
     response = requests.get(complete_url)
     request = response.json()
@@ -33,7 +33,8 @@ def get_period_weather_by_city_name(city_name, period):
 
     api_key = "f7c6ca0448a4bb6b626a01a57e60274e"
     base_url = "http://api.openweathermap.org/data/2.5/forecast?"
-    complete_url = base_url + "appid=" + api_key + "&q=" + city_name + "&units=" + 'metric' + "&cnt=" + str(period)
+    complete_url = f"{base_url}appid={api_key}&q={city_name}&units=metric&cnt={period}"
+    # complete_url = base_url + "appid=" + api_key + "&q=" + city_name + "&units=" + 'metric' + "&cnt=" + period
 
     response = requests.get(complete_url)
     request = response.json()

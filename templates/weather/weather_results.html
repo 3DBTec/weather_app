@@ -7,7 +7,7 @@
 {#    {% load crispy_forms_tags %}#}
 
     {% if results %}
-        {% if period == 'today' %}
+        {% if time_period == 'today' %}
             <h1 class="mt-4">Query Weather API for Today: {{ city_name }} </h1>
 
             <p>Weather<b>   &nbsp;{{ results.weather }} </b> </p>
@@ -18,8 +18,8 @@
             <p>Humidity<b>  {{ results.humidity }} </b> </p>
             <br>
 
-        {% elif period == '7_days' %}
-            <h1 class="mt-4">Query Weather API for Today: {{ city_name }} </h1>
+        {% elif time_period == 'period' %}
+            <h1 class="mt-4">Query Weather API for {{ period }} Days: {{ city_name }} </h1>
 
             <table class="table table-striped sortable w-75" style="text-align: center">
 {#                 <thead class='results-heading'>#}
@@ -49,6 +49,8 @@
              </table>
          {% endif %}
 
+    {% else %}
+          <h1 class="mt-4">No results for city: {{ city_name }} </h1>
     {% endif %}
 
 {% endblock %}
