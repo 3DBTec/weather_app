@@ -163,13 +163,16 @@ class WeatherSearchView(View):
             time_period = form.data['time_period']
             period      = form.data['period']
 
+            graphs = {}
+
             if time_period == 'today':
                 results     = open_weather_app.get_current_weather_by_city_name(city_name)
 
             elif time_period == 'period':
-                results     = open_weather_app.get_period_weather_by_city_name(city_name, period)
+                results, graphs    = open_weather_app.get_period_weather_by_city_name(city_name, period)
 
-            context     = {'form': form, 'city_name': city_name, 'results': results, 'time_period': time_period, 'period': period}
+            context     = {'form': form, 'city_name': city_name, 'results': results, 'time_period': time_period, 'period': period,
+                           'graphs': graphs}
 
             return render(request, template_name=self.template_results, context=context)
 

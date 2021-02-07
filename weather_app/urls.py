@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib                     import admin
 from django.urls                        import path
 from django.conf                        import settings
+from django.views.generic.base          import TemplateView
 
 from django.contrib.staticfiles.urls    import staticfiles_urlpatterns
+
 
 from apps.weather.views                 import WeatherSearchView
 from apps.weather.views                 import LineChartJSONView
@@ -29,6 +31,7 @@ urlpatterns = [
     path('admin/',           admin.site.urls),
 
     path('line_chart/',      line_chart,                     name='line_chart'),
+    path('bar_chart/',       TemplateView.as_view(template_name='weather/bar_chart.html')),
     path('line_chart_JSON/', line_chart_json,                name='line_chart_json'),
 ]
 

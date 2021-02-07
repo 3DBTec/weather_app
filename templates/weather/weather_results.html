@@ -46,7 +46,42 @@
                          <td>{{ day_result.humidity }}</td>
                      </tr>
                 {% endfor %}
-             </table>
+            </table>
+
+
+            <br><br>
+            <div id="container"></div>
+            <script src="https://code.highcharts.com/highcharts.src.js"></script>
+            <script>
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                         text: "{{ city_name }} Weather forecast for the next {{ period }} days"
+                    },
+                    xAxis: {
+                        categories: {{ graphs.categories }}
+                    },
+                    yAxis: {
+                        reversed: false
+                    },
+                    series: [{
+                        name: 'min',
+                        data:{{ graphs.series_min}},
+                        color: 'lightblue'
+                            },
+                    {
+                        name: 'temp',
+                        data: {{ graphs.series_temp}},
+                        color: 'grey'
+                    }, {
+                        name: 'max',
+                        data: {{ graphs.series_max}},
+                        color: 'red'
+                    }]
+                });
+             </script>
          {% endif %}
 
     {% else %}
@@ -54,56 +89,5 @@
     {% endif %}
 
 
-{#    <div id="container_test"></div>#}
-{##}
-{#    <script src="https://code.highcharts.com/highcharts.src.js"></script>#}
-{#  <script src="{% static 'javascript/highcharts.src.js' %}"></script>#}
-{#  <script>#}
-{#      Highcharts.chart('container_test', {#}
-{#            chart: {#}
-{#                type: 'column',#}
-                {#borderColor: '#EBBA95',#}
-                {#borderRadius: 20,#}
-                {#borderWidth: 5,#}
-{#                backgroundColor: '#FFFFFF',#}
-{#                shadow: true#}
-{#            },#}
-{#            title: {#}
-{#                text: '{{city_name}}',#}
-{#                useHTML: true,#}
-{#                style: {#}
-                    {#color: '#FF00FF',#}
-{#                    fontWeight: 'bold',#}
-                    {#'background-color': 'green',#}
-{#                    border: '1px solid black'#}
-{#                }#}
-{#            },#}
-{#            xAxis: {#}
-{#                categories: [#}
-{#                    {% for domain_no, domain_details in domain_dict.items %}' {{ domain_details.name }}' {% if not forloop.last %}, {% endif %} {% endfor %}#}
-{#                    {% for category in categories %} ' {{ category }}' {% if not forloop.last %}, {% endif %} {% endfor %}#}
-{#                ]#}
-{#            },#}
-{#            series: [{#}
-{#                name: 'Yes',#}
-{#                data: [#}
-{#                    {% for yes in series_yes %}  {{ yes }} {% if not forloop.last %}, {% endif %} {% endfor %}#}
-{#                ],#}
-{#                color: 'orange'#}
-{#            }, {#}
-{#                name: 'No',#}
-{#                data: [#}
-{#                    {% for no in series_no %}  {{ no }} {% if not forloop.last %}, {% endif %} {% endfor %}#}
-{#                ],#}
-{#                color: 'grey'#}
-{#            }, {#}
-{#                name: 'Todo',#}
-{#                data: [#}
-{#                    {% for todo in series_todo %}  {{ todo }} {% if not forloop.last %}, {% endif %} {% endfor %}#}
-{#                ],#}
-{#                color: 'blue'#}
-{#            }]#}
-{#     });#}
-{#  </script>#}
-
 {% endblock %}
+

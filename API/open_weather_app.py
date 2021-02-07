@@ -39,6 +39,12 @@ def get_period_weather_by_city_name(city_name, period):
     response = requests.get(complete_url)
     request = response.json()
     results = {}
+    graphs = {}
+
+    categories  = []
+    series_min  = []
+    series_max  = []
+    series_temp = []
 
     print(request)
     if request["cod"] != "404":
@@ -58,7 +64,17 @@ def get_period_weather_by_city_name(city_name, period):
             results[day]['pressure'] = main_result["pressure"]
             results[day]['humidity'] = main_result["humidity"]
 
-    return results
+            categories.append(day)
+            series_min.append(main_result["temp_min"])
+            series_max.append(main_result["temp_max"])
+            series_temp.append(main_result["temp"])
+
+    graphs['categories']  = categories
+    graphs['series_min']  = series_min
+    graphs['series_max']  = series_max
+    graphs['series_temp'] = series_temp
+
+    return results, graphs
 
 
 def get_data_by_location(latitude, longitude):
