@@ -24,7 +24,6 @@ from apps.weather.views                 import UserViewSet
 from apps.weather.views                 import GroupViewSet
 from apps.country.views                 import CountryViewSet
 from apps.city.views                    import CityViewSet
-from apps.continent.views               import ContinentViewSet
 
 from apps.weather.views                 import WeatherSearchView
 
@@ -35,7 +34,6 @@ router.register(r'users',       UserViewSet)
 router.register(r'groups',      GroupViewSet)
 router.register(r'countrys',    CountryViewSet)
 router.register(r'citys',       CityViewSet)
-router.register(r'continent',   ContinentViewSet)
 
 urlpatterns = [
     path('',                WeatherSearchView.as_view(),    name='weather_search'),

@@ -35,7 +35,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Application definition
 
 INSTALLED_APPS = [
-    'apps.continent',
     'apps.country',
     'apps.city',
     'apps.weather',

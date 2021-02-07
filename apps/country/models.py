@@ -7,16 +7,18 @@ from django.db                  import models
 
 class Country(models.Model):
 
-    # CONTINENTS = (
-    #     ('available', _('Available to borrow')),
-    #     ('borrowed', _('Borrowed by someone')),
-    #     ('archived', _('Archived - not available anymore')),
-    # )
+    CONTINENTS = (
+        ('AF', 'Africa'),
+        ('AS', 'Asia'),
+        ('AN', 'Antartica'),
+        ('EU', 'Europe'),
+        ('NA', 'North America'),
+        ('SA', 'South America')
+    )
 
     country_name          = models.CharField(max_length=200)
     country_code          = models.CharField(max_length=3)
-    # continent             = models.ForeignKey('continent.Continent', on_delete=models.PROTECT, related_name='countries')
-    continent             = models.Choices('continent.Continent', on_delete=models.PROTECT, related_name='countries')
+    continent             = models.CharField(choices=CONTINENTS, default='AF', max_length=30)
 
     def __str__(self):
         return self.country_name

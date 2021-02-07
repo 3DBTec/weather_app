@@ -1,7 +1,6 @@
 from django.contrib.auth.models         import User, Group
 from apps.city.models                   import City
 from apps.country.models                import Country
-from apps.continent.models              import Continent
 from rest_framework                     import serializers
 
 
@@ -17,24 +16,12 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
-class ContinentSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Continent
-        fields = ['continent_name', 'continent_code']
-
-
 class CountrySerializer(serializers.ModelSerializer):
-    continent = ContinentSerializer()
+    continent = serializers.ChoiceField(choices=Country.CONTINENTS)
 
     class Meta:
         model = Country
         fields = ['country_name', 'country_code', 'continent']
-
-    def create(self, validated_data):
-        continent_data = validated_data.pop('continent')
-        continent = Continent.objects.create(**continent_data)
-        country = Country.objects.create(continent=continent, **validated_data)
-        return country
 
 
 class CitySerializer(serializers.HyperlinkedModelSerializer):
