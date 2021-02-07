@@ -1,24 +1,15 @@
 import requests
+from datetime                   import datetime
 
 
 def get_current_weather_by_city_name(city_name):
 
     api_key = "f7c6ca0448a4bb6b626a01a57e60274e"
-
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
-
-    # complete_url = f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={api_key}"
-
-    # complete_url = f"https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&appid={api_key}"
-    # #
     complete_url = base_url + "appid=" + api_key + "&q=" + city_name + "&units=" + 'metric'
 
-    # get method of requests module
-    # return response object
     response = requests.get(complete_url)
-
     request = response.json()
-
     results = {}
 
     print(request)
@@ -34,6 +25,37 @@ def get_current_weather_by_city_name(city_name):
 
         results['pressure'] = main_result["pressure"]
         results['humidity'] = main_result["humidity"]
+
+    return results
+
+
+def get_period_weather_by_city_name(city_name, period):
+
+    api_key = "f7c6ca0448a4bb6b626a01a57e60274e"
+    base_url = "http://api.openweathermap.org/data/2.5/forecast?"
+    complete_url = base_url + "appid=" + api_key + "&q=" + city_name + "&units=" + 'metric' + "&cnt=" + str(period)
+
+    response = requests.get(complete_url)
+    request = response.json()
+    results = {}
+
+    print(request)
+    if request["cod"] != "404":
+
+        for day, day_result in enumerate(request['list']):
+            day = day + 1
+            results[day] = {}
+
+            results[day]['weather']  = day_result['weather'][0]['main']
+
+            main_result              = day_result["main"]
+
+            results[day]['temp']     = main_result["temp"]
+            results[day]['min']      = main_result["temp_min"]
+            results[day]['max']      = main_result["temp_max"]
+
+            results[day]['pressure'] = main_result["pressure"]
+            results[day]['humidity'] = main_result["humidity"]
 
     return results
 

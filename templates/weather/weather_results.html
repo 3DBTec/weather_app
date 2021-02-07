@@ -7,39 +7,47 @@
 {#    {% load crispy_forms_tags %}#}
 
     {% if results %}
+        {% if period == 'today' %}
+            <h1 class="mt-4">Query Weather API for Today: {{ city_name }} </h1>
 
-    <h1 class="mt-4">Query Weather API for Today: {{ city_name }} </h1>
+            <p>Weather<b>   &nbsp;{{ results.weather }} </b> </p>
+            <p>Temp: <b>    &nbsp;&nbsp;&nbsp;&nbsp; {{ results.temp }}</b> </p>
+            <p>Min: <b>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ results.min }}</b></p>
+            <p>Max: <b>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ results.max }}</b></p>
+            <p>Pressure:<b> {{ results.pressure }}</b> </p>
+            <p>Humidity<b>  {{ results.humidity }} </b> </p>
+            <br>
 
-             {% if period == 'today' %}
-                <p>Weather<b>   &nbsp;{{ results.weather }} </b> </p>
-                <p>Temp: <b>    &nbsp;&nbsp;&nbsp;&nbsp; {{ results.temp }}</b> </p>
-                <p>Min: <b>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ results.min }}</b></p>
-                <p>Max: <b>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ results.max }}</b></p>
-                <p>Pressure:<b> {{ results.pressure }}</b> </p>
-                <p>Humidity<b>  {{ results.humidity }} </b> </p>
-                <br>
+        {% elif period == '7_days' %}
+            <h1 class="mt-4">Query Weather API for Today: {{ city_name }} </h1>
 
-             {% elif period == '1_hour' %}
-
-                 <table class="table table-striped sortable w-75">
-                     <thead class='results-heading'>
-                         <tr class="table-secondary">
-                            <th>Min</th>
-                            <th>Max</th>
-                            <th>Average</th>
-                            <th>Median</th>
-                            <th>Humidity</th>
-                         </tr>
-                     </thead>
-                     <tr>
-                         <td>{{ results.min }}</td>
-                         <td>{{ results.max }}</td>
-                         <td>{{ results.average }}</td>
-                         <td>{{ results.median }}</td>
-                         <td>{{ results.humidity }}</td>
+            <table class="table table-striped sortable w-75" style="text-align: center">
+{#                 <thead class='results-heading'>#}
+{#                     <tr class="table-secondary">#}
+                <thead>
+                    <tr>
+                        <th style="width: 50px">Day</th>
+                        <th style="width: 100px">Weather</th>
+                        <th style="width: 100px">Temp</th>
+                        <th style="width: 100px">Min</th>
+                        <th style="width: 100px">Max</th>
+                        <th style="width: 100px">Pressure</th>
+                        <th style="width: 100px">Humidity</th>
                      </tr>
-                 </table>
-             {% endif %}
+                </thead>
+                {% for day, day_result in results.items %}
+                     <tr>
+                         <td>{{ day }}</td>
+                         <td>{{ day_result.weather }}</td>
+                         <td>{{ day_result.temp }}</td>
+                         <td>{{ day_result.min }}</td>
+                         <td>{{ day_result.max }}</td>
+                         <td>{{ day_result.pressure }}</td>
+                         <td>{{ day_result.humidity }}</td>
+                     </tr>
+                {% endfor %}
+             </table>
+         {% endif %}
 
     {% endif %}
 
