@@ -29,6 +29,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +41,7 @@ INSTALLED_APPS = [
     'apps.weather',
 
     'chartjs',
+    'crispy_forms',
 
     'django.contrib.admin',
     'django.contrib.auth',
