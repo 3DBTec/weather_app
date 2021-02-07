@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'apps.city',
     'apps.weather',
 
-    'chartjs',
     'crispy_forms',
 
     'django.contrib.admin',
