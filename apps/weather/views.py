@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins                                                     import LoginRequiredMixin
 from django.views.generic                                                           import View
+from django.views.generic                                                           import TemplateView
+
 from django.utils                                                                   import timezone
 import pytz
 from collections                                                                    import defaultdict
@@ -16,6 +18,8 @@ from django.forms                                                               
 from django.db.models.functions                                                     import Length, Upper
 
 from apps.city.models                                                               import City
+
+from chartjs.views.lines                                                            import BaseLineChartView
 
 from API                                                                            import open_weather_app
 
@@ -168,3 +172,25 @@ class WeatherSearchView(View):
             context     = {'form': form, 'city_name': city_name, 'results': results, 'time_period': time_period, 'period': period}
 
             return render(request, template_name=self.template_results, context=context)
+
+
+class LineChartJSONView(BaseLineChartView):
+
+    def get_labels(self):
+        """Return 7 labels for the x-axis."""
+        return ["January", "February", "March", "April", "May", "June", "July"]
+
+    def get_providers(self):
+        """Return names of datasets."""
+        return ["Central", "Eastside", "Westside"]
+
+    def get_data(self):
+        """Return 3 datasets to plot."""
+
+        return [[75, 44, 92, 11, 44, 95, 35],
+                [41, 92, 18, 3, 73, 87, 92],
+                [87, 21, 94, 3, 90, 13, 65]]
+
+
+line_chart = TemplateView.as_view(template_name='weather/line_chart.html')
+line_chart_json = LineChartJSONView.as_view()
