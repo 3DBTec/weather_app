@@ -47,7 +47,7 @@ class WeatherSelectForm(forms.Form):
                 Column('period',        css_class='form-group col-2 mb-0 med-label'),
                 css_class='form-row'
             ),
-            Submit('submit', 'Search',      css_class='btn-blue ripple mr-0 mb-3 float-right'),
+            Submit('submit', 'Search',      css_class='btn-blue ripple mr-0 mb-3 float-left'),
         )
 
 
