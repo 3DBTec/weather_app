@@ -16,7 +16,7 @@ class WeatherSelectForm(forms.Form):
 
     city_text       = forms.CharField(label='City Text', max_length=200, required=False)
 
-    city_use_text   = forms.BooleanField(label='Use City Text', required=False)
+    city_use_text   = forms.BooleanField(label='Use City Text', initial=False, required=False)
 
     # time_period     = forms.ChoiceField(choices=TIME_PERIOD)
 
