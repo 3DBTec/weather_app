@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -19,5 +20,34 @@
     - Period is Mandatory but Ignored if Time Period is Today
     <p>
     - You can add more City Choices using the Restfull on the Previous Page
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+
+        $(document).ready( function () {
+            $('#div_id_period').parent().hide()
+            $('#div_id_city_text').parent().hide()
+        });
+
+        $('input:radio[name="time_period"]').change(
+            function(){
+                if (this.checked && this.value == 'period') {
+                   $('#div_id_period').parent().show();
+                }
+                else {
+                    $('#div_id_period').parent().hide();
+                }
+            });
+
+        $('input:checkbox[name="city_use_text"]').change(
+            function(){
+                if (this.checked==true) {
+                    $('#div_id_city_text').parent().show();
+                }
+                else {
+                    $('#div_id_city_text').parent().hide();
+                }
+            });
+    </script>
 
 {% endblock %}

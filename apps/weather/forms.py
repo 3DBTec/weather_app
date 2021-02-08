@@ -5,7 +5,6 @@ from django                                         import forms
 from apps.city.models                               import City
 
 TIME_PERIOD = (
-    ('', 'Choose...'),
     ('today',   'Today Only'),
     ('period',  'Number Days')
 )
@@ -19,9 +18,11 @@ class WeatherSelectForm(forms.Form):
 
     city_use_text   = forms.BooleanField(label='Use City Text', required=False)
 
-    time_period     = forms.ChoiceField(choices=TIME_PERIOD)
+    # time_period     = forms.ChoiceField(choices=TIME_PERIOD)
 
-    period          = forms.IntegerField(label="Period", widget=forms.NumberInput(attrs={'min': 1, 'max': 20}))
+    time_period     = forms.ChoiceField(label='', choices=TIME_PERIOD, initial='today', widget=forms.RadioSelect())
+
+    period          = forms.IntegerField(label="Period", widget=forms.NumberInput(attrs={'min': 1, 'max': 40}), initial=1, required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -35,11 +36,11 @@ class WeatherSelectForm(forms.Form):
                 css_class='form-row'
             ),
             Row(
-                Column('city_text', css_class='form-group col-3 mb-0 med-label'),
+                Column('city_use_text', css_class='form-group col-3 mb-0 med-label'),
                 css_class='form-row'
             ),
             Row(
-                Column('city_use_text', css_class='form-group col-3 mb-0 med-label'),
+                Column('city_text', css_class='form-group col-3 mb-0 med-label'),
                 css_class='form-row'
             ),
             Row(
