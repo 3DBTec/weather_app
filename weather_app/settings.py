@@ -26,7 +26,7 @@ SECRET_KEY = '4_8!9bd@$=#^nnj2mu%kzqkm*4y^spa+ds#aex0n14r5*i6871'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-18-217-248-37.us-east-2.compute.amazonaws.com', '18.217.248.37']
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

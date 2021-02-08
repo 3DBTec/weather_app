@@ -1,5 +1,5 @@
 asgiref==3.3.1
-pip certifi==2020.12.5
+certifi==2020.12.5
 chardet==4.0.0
 Django==3.1.6
 django-braces==1.14.0
