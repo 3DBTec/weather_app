@@ -48,11 +48,14 @@ class WeatherSearchView(View):
 
             form = WeatherSelectForm(request.GET or None)
 
+            city_use_text   = False
             city_choice     = form.data['city_choice']
             city_text       = form.data['city_text']
-            city_use_text   = form.data['city_use_text']
             time_period     = form.data['time_period']
             period          = form.data['period']
+
+            if 'city_used_text' in form.changed_data:
+                city_use_text = form.data['city_use_text']
 
             graphs = {}
 
