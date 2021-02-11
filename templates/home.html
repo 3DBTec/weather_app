@@ -4,10 +4,32 @@
 
     {% load crispy_forms_tags %}
 
-    <h3>Welcome </h3>
+    <h1>Welcome </h1>
+    <p></p>
 
-    <p><a href="{% url 'api-root' %}">       Go to the City Restfull API Handler</a></p>
+    <p>
+        <strong>
+            <a href="{% url 'api-root' %}">       Go to the City Restfull API Handler</a>
+        </strong>
+    </p>
+    <p>
+        <ul>
+            <li> This will allow you to insert, Update, View and Delete City Records </li>
+            <li> This will allow you to insert, Update, View and Delete User Records </li>
+        </ul>
+    </p>
 
-    <p><a href="{% url 'weather_search' %}"> Go to the Weather Search  API Handler</a></p>
+    <p>
+        <strong>
+            <a href="{% url 'weather_search' %}"> Go to the Weather Search  API Handler</a>
+        </strong>
+    </p>
+    <p>
+        <ul>
+            <li> This will allow you to Search for Weather by Above loaded City Records</li>
+            <li> This will allow you to Search for Weather using a city name</li>
+            <li> You can also specify the Period of Either today or up to 40 days</li>
+        </ul>
+    </p>
 
 {% endblock %}
