@@ -1,5 +1,5 @@
-from crispy_forms.helper                    import FormHelper
-from crispy_forms.layout                    import Layout, Submit, Row, Column, Fieldset
+from crispy_forms.helper                            import FormHelper
+from crispy_forms.layout                            import Layout, Submit, Row, Column, Fieldset, HTML
 
 from django                                         import forms
 from apps.city.models                               import City
@@ -18,19 +18,16 @@ class WeatherSelectForm(forms.Form):
 
     city_use_text   = forms.BooleanField(label='Use City Text', initial=False, required=False)
 
-    # time_period     = forms.ChoiceField(choices=TIME_PERIOD)
-
     time_period     = forms.ChoiceField(label='', choices=TIME_PERIOD, initial='today', widget=forms.RadioSelect())
 
-    period          = forms.IntegerField(label="Period", widget=forms.NumberInput(attrs={'min': 1, 'max': 40}), initial=1, required=False)
+    period          = forms.IntegerField(label="", widget=forms.NumberInput(attrs={'min': 1, 'max': 40}), initial=1, required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            Fieldset(
-                'SEARCH DETAILS',
-            ),
+            HTML('<fieldset  class="border p-2"">'),
+            HTML('<legend  class="w-auto">CITY DETAILS</legend>'),
             Row(
                 Column('city_choice', css_class='form-group col-3 mb-0 med-label'),
                 css_class='form-row'
@@ -43,12 +40,17 @@ class WeatherSelectForm(forms.Form):
                 Column('city_text', css_class='form-group col-3 mb-0 med-label'),
                 css_class='form-row'
             ),
+            HTML('</fieldset> <p>'),
+
+            HTML('<fieldset  class="border p-2"">'),
+            HTML('<legend  class="w-auto">PERIOD DETAILS</legend>'),
             Row(
                 Column('time_period',   css_class='form-group col-2 mb-0 med-label'),
-                Column('period',        css_class='form-group col-2 mb-0 med-label'),
+                Column('period',        css_class='form-group col-1 mb-0 mt-3 med-label'),
                 css_class='form-row'
             ),
-            Submit('submit', 'Search',      css_class='btn-blue ripple mr-0 mb-3 float-left'),
+            HTML('</fieldset>'),
+            Submit('submit', 'Search',      css_class='btn-blue ripple mr-0 mb-3 mt-3 float-left'),
         )
 
 
@@ -66,6 +68,7 @@ class WeatherResultForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
+            HTML('<fieldset class="master_company_js"> <legend>Agents</legend> </fieldset>'),
             Fieldset(
                 'RESULT DETAILS',
             ),

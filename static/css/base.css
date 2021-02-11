@@ -3,3 +3,20 @@ input[type=text] {
   border:0;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
+
+h1 {
+     font-family: 'Lato';font-size: 48px;
+}
+
+body,html {
+    overflow-x: hidden;
+    overflow-y: overlay;
+    min-width: 800px;
+    background: #fcfdfe;);
+}
+
+legend.scheduler-border {
+    width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+}
