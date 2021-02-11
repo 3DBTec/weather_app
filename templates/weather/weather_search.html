@@ -42,10 +42,26 @@
         $('input:checkbox[name="city_use_text"]').change(
             function(){
                 if (this.checked==true) {
-                    $('#div_id_city_text').parent().show();
+                    $("#div_id_city_text").parent().show();
+                    $("#did_city_text").attr('required',true);
+                    $("#id_city_text").required = true;
+                    $("#id_city_text").val('').prop('required', true);
+
+                    $("#div_id_city_choice").parent().hide();
+                    $("#id_city_choice").attr('required',false);
+                    $("#id_city_choice").required = false;
+                    $("#id_city_choice").val('').prop('required', false);
                 }
-                else {
-                    $('#div_id_city_text').parent().hide();
+                if (this.checked==false) {
+                    $("#div_id_city_text").parent().hide();
+                    $("#id_city_text").attr('required',false);
+                    $("#id_city_text").required = false;
+                    $("#id_city_text").val('').prop('required', false);
+
+                    $("#div_id_city_choice").parent().show();
+                    $("#id_city_choice").attr('required',true);
+                    $("#id_city_choice").required = true;
+                    $("#id_city_choice").val('').prop('required', true);
                 }
             });
     </script>
